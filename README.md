@@ -1,5 +1,5 @@
 # PACImport
-Simple script for creating [PAC Manager](https://en.wikipedia.org/wiki/PACManager) import file.
+Simple script for generating [PAC Manager](https://en.wikipedia.org/wiki/PACManager) import file.
 
 
 # Download & Install
@@ -28,7 +28,7 @@ Options:
 ```
 
 # Example
-I want to create connections for server IPs `192.168.120.1` through `192.168.120.20` for user `root` with password `s3cr3t` on port `22`.  
+I want to generate import file `PACImportFile.yml` with connections for server IPs `192.168.120.1` through `192.168.120.20` for user `root` with password `s3cr3t` on port `22`.  
 ```sh
 ~/projects/PACImport $ PACImport -b 192.168.120\
                                  -s 1\
