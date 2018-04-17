@@ -6,7 +6,7 @@ from uuid import uuid4
 class PACImport:
 
 	def __init__(self
-	            ,base_ip="127.0.0"
+	            ,base_ip="192.168.120"
 	            ,filename="PACImport.yml"
 	            ,_range=(0, 255)
 	            ,user=""
