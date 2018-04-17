@@ -200,5 +200,5 @@ if __name__ == "__main__":
 	         ,opts.filename
 	         ,(opts.start, opts.end)
 	         ,opts.user
-	         ,opts.password
+	         ,opts.password.replace("\\", "")
 	         ,opts.port).main()
