@@ -55,7 +55,7 @@ class PACImport:
   favourite: 0
   infer from KPX where: 3
   infer user pass from KPX: ''
-  ip: 192.168.95.180
+  ip: {ip}
   local after: []
   local before: []
   local connected: []
