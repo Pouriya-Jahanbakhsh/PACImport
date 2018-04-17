@@ -1,6 +1,6 @@
 #! /usr/bin/python
 
-from uuid import UUID, uuid4
+from uuid import uuid4
 
 
 class PACImport:
