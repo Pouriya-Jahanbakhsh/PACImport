@@ -11,7 +11,8 @@ class PACImport:
 	            ,_range=(0, 255)
 	            ,user=""
 	            ,password=""
-	            ,port=22):
+	            ,port=22
+                    ,public_key="~"):
 		count = 0
 		for octet in base_ip.split("."):
 			if (count > 3) or (not octet.isdigit()) or (int(octet) < 0) or (int(octet) > 255):
@@ -36,9 +37,10 @@ class PACImport:
 		self.user = user
 		self.password = password
 		self.port = port
+		self.public_key = public_key
 
 
-	def make_connection(self, uuid, ip, user, password, port):
+	def make_connection(self, uuid, ip, user, password, port, public_key):
 		return """{uuid}:
   KPX title regexp: .*{ip}.*
   _is_group: 0
@@ -74,7 +76,7 @@ class PACImport:
   proxy pass: ''
   proxy port: 8080
   proxy user: ''
-  public key: ~
+  public key: {public_key}
   quote command: ''
   remove control chars: ''
   save session logs: ''
@@ -125,7 +127,7 @@ class PACImport:
   use proxy: 0
   use sudo: ''
   user: {user}
-  variables: []""".format(uuid=uuid, ip=ip, user=user, password=password, port=port)
+  variables: []""".format(uuid=uuid, ip=ip, user=user, password=password, port=port, public_key=public_key)
 
 
 	def main(self):
@@ -139,7 +141,8 @@ class PACImport:
 			                                   ,ip
 			                                   ,self.user
 			                                   ,self.password
-			                                   ,self.port) + "\n"
+			                                   ,self.port
+                                                           ,self.public_key) + "\n"
 		data = header + connections
 		if self.filename:
 			fd = open(self.filename, "w")
@@ -194,6 +197,12 @@ if __name__ == "__main__":
 	               ,help="Host port"
 	               ,default=22
 	               ,type="int")
+	optp.add_option("-k"
+                       ,"--key"
+                       ,dest="public_key"
+                       ,help="Public key address"
+                       ,default="~"
+                       ,type="str")
 	opts, args = optp.parse_args()
 
 	PACImport(opts.base
@@ -201,4 +210,5 @@ if __name__ == "__main__":
 	         ,(opts.start, opts.end)
 	         ,opts.user
 	         ,opts.password.replace("\\", "")
-	         ,opts.port).main()
+	         ,opts.port
+                 ,opts.public_key).main()
