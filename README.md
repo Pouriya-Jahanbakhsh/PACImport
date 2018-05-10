@@ -37,6 +37,7 @@ I want to generate import file `PACImportFile.yml` with connections for server I
                                  -p s3cr3t\
                                  -P 22\
                                  -f PACImportFile.yml
+                                 -k /path/to/public/key
 ~/projects/PACImport $ ls | grep .yml
 PACImportFile.yml
 ```
