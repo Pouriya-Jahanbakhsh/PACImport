@@ -38,15 +38,19 @@ class PACImport:
 		self.password = password
 		self.port = port
 		self.public_key = public_key
+		if public_key == "~":
+			self.auth_type = "userpass"
+		else:
+			self.auth_type = "publickey"
 
 
-	def make_connection(self, uuid, ip, user, password, port, public_key):
+	def make_connection(self, uuid, ip, user, password, port, public_key, auth_type):
 		return """{uuid}:
   KPX title regexp: .*{ip}.*
   _is_group: 0
   _protected: 0
   auth fallback: 1
-  auth type: userpass
+  auth type: {auth_type}
   autoreconnect: ''
   autossh: ''
   children: {{}}
@@ -69,7 +73,7 @@ class PACImport:
   parent: __PAC__EXPORTED__
   pass: '{password}'
   passphrase: ''
-  passphrase user: ''
+  passphrase user: {user}
   port: {port}
   prepend command: ''
   proxy ip: ''
@@ -127,7 +131,7 @@ class PACImport:
   use proxy: 0
   use sudo: ''
   user: {user}
-  variables: []""".format(uuid=uuid, ip=ip, user=user, password=password, port=port, public_key=public_key)
+  variables: []""".format(uuid=uuid, ip=ip, user=user, password=password, port=port, public_key=public_key, auth_type=auth_type)
 
 
 	def main(self):
@@ -142,7 +146,8 @@ class PACImport:
 			                                   ,self.user
 			                                   ,self.password
 			                                   ,self.port
-                                                           ,self.public_key) + "\n"
+                                                           ,self.public_key
+                                                           ,self.auth_type) + "\n"
 		data = header + connections
 		if self.filename:
 			fd = open(self.filename, "w")
