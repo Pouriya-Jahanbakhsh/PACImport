@@ -34,10 +34,10 @@ I want to generate import file `PACImportFile.yml` with connections for server I
                                  -s 1\
                                  -e 20\
                                  -u root\
-                                 -p s3cr3t\
-                                 -P 22\
+                                 -p s3cr3t\ # optional. if you used public key.
+                                 -P 22\
                                  -f PACImportFile.yml
-                                 -k /path/to/public/key
+                                 -k /path/to/public/key # optional. if you used password
 ~/projects/PACImport $ ls | grep .yml
 PACImportFile.yml
 ```
