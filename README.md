@@ -24,7 +24,9 @@ Options:
   -u USER, --user=USER  Host username.
   -p PASSWORD, --password=PASSWORD
                         Host password
-  -P PORT, --port=PORT  Host port
+  -P PORT, --port=PORT  Host port
+  -k PUBLICKEY, --key=PUBLICKEY
+                        Public key address
 ```
 
 # Example
