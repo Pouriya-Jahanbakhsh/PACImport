@@ -156,7 +156,7 @@ class PACImport:
 	def main(self):
 		header = "---\n__PAC__EXPORTED__:\n  children:\n"
 		connections = ""
-		for octet in range(self.start, self.stop):
+		for octet in range(self.start, self.stop+1):
 			uuid = uuid4()
 			header += "    {}: 1\n".format(uuid)
 			ip = self.base_ip + "." + str(octet)
