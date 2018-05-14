@@ -68,7 +68,7 @@ class PACImport:
   mac: ''
   macros: []
   method: SSH
-  name: {ip}
+  name: {name}
   options: ' -X'
   parent: __PAC__EXPORTED__
   pass: '{password}'
@@ -131,7 +131,26 @@ class PACImport:
   use proxy: 0
   use sudo: ''
   user: {user}
-  variables: []""".format(uuid=uuid, ip=ip, user=user, password=password, port=port, public_key=public_key, auth_type=auth_type)
+  variables: []""".format(uuid=uuid
+                         ,ip=ip
+                         ,user=user
+                         ,password=password
+                         ,port=port
+                         ,public_key=public_key
+                         ,auth_type=auth_type
+                         ,name=self.make_name(ip))
+
+
+	def make_name(self, ip):
+		ip_list = ip.split(".")
+		last_octet = ip_list[3]
+		last_octet_len = len(last_octet)
+		if last_octet_len == 1:
+			last_octet = "00" + last_octet
+		elif last_octet_len == 2:
+			last_octet = "0" + last_octet
+		ip_list[3] = last_octet
+		return ".".join(ip_list)
 
 
 	def main(self):
